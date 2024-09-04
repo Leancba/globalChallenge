@@ -1,9 +1,23 @@
-/**
- * @format
- */
-
-import {AppRegistry} from 'react-native';
+import React from 'react';
+import { AppRegistry } from 'react-native';
 import App from './App';
-import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => App);
+import store from "./src/Redux/store";
+import { name as appName } from './app.json';
+import { Provider } from "react-redux";
+import { PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+
+
+
+const Main = () => (
+	<PaperProvider>
+		<NavigationContainer>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</NavigationContainer>
+	</PaperProvider>
+);
+
+AppRegistry.registerComponent(appName, () => Main);

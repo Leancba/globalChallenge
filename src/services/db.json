@@ -1,0 +1,117 @@
+{
+  "chats": [
+    {
+      "id": 1,
+      "contact": "John",
+      "avatar": "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-2.jpg",
+      "lastMessage": "Hey, how are you?",
+      "lastMessageTime": "10:00 AM",
+      "messages": [
+        {
+          "sender": "John",
+          "content": "Hey, how are you?",
+          "time": "10:00 AM"
+        },
+        {
+          "sender": "You",
+          "content": "I'm good, thanks! How about you?",
+          "time": "10:05 AM"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "contact": "Maria",
+      "avatar": "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-1.jpg",
+      "lastMessage": "Do you want to go out tonight?",
+      "lastMessageTime": "yesterday",
+      "messages": [
+        {
+          "sender": "Maria",
+          "content": "Do you want to go out tonight?",
+          "time": "yesterday"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "contact": "Peter",
+      "avatar": "https://imgcdn.stablediffusionweb.com/2024/3/24/3b153c48-649f-4ee2-b1cc-3d45333db028.jpg",
+      "lastMessage": "I'll be late for the meeting",
+      "lastMessageTime": "2 hours ago",
+      "messages": [
+        {
+          "sender": "Peter",
+          "content": "I'll be late for the meeting",
+          "time": "2 hours ago"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "contact": "Alice",
+      "avatar": "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-6.jpg",
+      "lastMessage": "Can we reschedule the call?",
+      "lastMessageTime": "3 hours ago",
+      "messages": [
+        {
+          "sender": "Alice",
+          "content": "Can we reschedule the call?",
+          "time": "3 hours ago"
+        },
+        {
+          "sender": "You",
+          "content": "Sure, what time works for you?",
+          "time": "2 hours ago"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "contact": "Bob",
+      "avatar": "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-4.jpg",
+      "lastMessage": "I have sent the documents.",
+      "lastMessageTime": "yesterday",
+      "messages": [
+        {
+          "sender": "Bob",
+          "content": "I have sent the documents.",
+          "time": "yesterday"
+        },
+        {
+          "sender": "You",
+          "content": "Got it, thanks! I'll review them today.",
+          "time": "yesterday"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "contact": "Eve",
+      "avatar": "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-3.jpg",
+      "lastMessage": "Looking forward to the meeting!",
+      "lastMessageTime": "2 days ago",
+      "messages": [
+        {
+          "sender": "Eve",
+          "content": "Looking forward to the meeting!",
+          "time": "2 days ago"
+        },
+        {
+          "sender": "You",
+          "content": "Me too! See you there.",
+          "time": "2 days ago"
+        }
+      ]
+    }
+  ],
+  "userProfile": {
+    "name": "John",
+    "phone": "+123456789",
+    "avatar": "https://img.freepik.com/premium-photo/3d-character-avatar_113255-5314.jpg",
+    "status": "No puedo hablar, solo GlobalChats",
+    "lastSeen": "5 minutes ago",
+    "email": "challenge@gmail.com",
+    "password": "Contraseña12345_"
+  }
+}
