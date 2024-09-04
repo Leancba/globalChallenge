@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Portal, Modal, Title, TextInput, Button } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { UpdateUserData } from 'services/userDataApi';
+import { useToast } from 'react-native-toast-notifications';
 
 const EditModal = ({
   visible,
@@ -8,8 +11,27 @@ const EditModal = ({
   editingField,
   fieldValue,
   setFieldValue,
-  handleSave,
 }) => {
+
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const handleSave = async () => {
+    setLoading(true);
+    const updatedField = { [editingField.toLowerCase()]: fieldValue };
+
+    try {
+      await UpdateUserData(updatedField, dispatch);
+      toast.show('Datos actualizados exitosamente', { type: "warning" });
+    } catch (error) {
+      toast.show('Ha ocurrido un error al actualizar los datos', { type: "danger" });
+    }
+
+    setLoading(false);
+    hideModal();
+  };
+
   return (
     <Portal>
       <Modal
@@ -26,7 +48,7 @@ const EditModal = ({
           outlineStyle={styles.customOutlineStyle}
         />
         <View style={styles.buttonContainer}>
-          <Button mode="contained" onPress={handleSave} style={styles.button}>
+          <Button loading={loading} mode="contained" onPress={handleSave} style={styles.button}>
             Save
           </Button>
           <Button mode="contained" onPress={hideModal} style={styles.button}>
@@ -43,6 +65,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#028ab9',
     padding: 20,
     borderRadius: 10,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   title: {
     marginBottom: 5,

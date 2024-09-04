@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, IconButton, List} from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-import { useToast } from "react-native-toast-notifications";
-
-import { UpdateUserData } from 'services/userDataApi';
 import { useSelector } from 'react-redux';
 
 import AvatarModal from './Modals/AvatarModal';
@@ -16,8 +12,6 @@ const UserProfile = () => {
 
   const userData = useSelector((state) => state.userData)
 
-  const toast = useToast()
-  const dispatch = useDispatch()
 
   const [visible, setVisible] = useState(false);
   const [avatarModal, setAvatarModal] = useState(false);
@@ -35,21 +29,7 @@ const UserProfile = () => {
     setVisible(false);
   };
 
-  const handleSave = async () => {
-
-    const updatedField = { [editingField.toLowerCase()]: fieldValue };
-
-    try {
-
-      await UpdateUserData(updatedField, dispatch);
-      toast.show('Datos actualizados exitosamente', { type: "warning" });
-
-    } catch (error) {
-      toast.show('Ha ocurrido un error al actualizar los datos', { type: "danger" });
-    }
-
-    hideModal();
-  };
+ 
 
   return (
     <View style={styles.container}>
@@ -122,7 +102,6 @@ const UserProfile = () => {
         editingField={editingField}
         fieldValue={fieldValue}
         setFieldValue={setFieldValue}
-        handleSave={handleSave}
       />
 
       <AvatarModal

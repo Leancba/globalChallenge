@@ -1,7 +1,9 @@
+import React, { useRef, useEffect, useMemo } from "react";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Avatar, Appbar } from "react-native-paper";
-import { Alert } from 'react-native';
+import { Alert, Animated, View, StyleSheet, Easing, Text } from 'react-native';
+import LinearGradient from "react-native-linear-gradient";
 
 export const checkToken = async (navigation) => {
 
@@ -98,6 +100,109 @@ export const avatares = [
   "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-10.jpg"
 ];
 
+
+
+
+
+const GRADIENT_START = { x: 0, y: 0 };
+const GRADIENT_END = { x: 1, y: 0 };
+
+export const Skeleton = ({
+  height,
+  width,
+  backgroundColor="#00749c" , // Powder Blue
+  highlightColor="#028ab9" ,
+  speed = 800,
+  style, // Add style prop here
+}) => {
+  const animatedValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: speed,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      })
+    ).start();
+  }, [animatedValue, speed]);
+
+  const translateX = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-width, width],
+  });
+
+  const gradientColors = useMemo(
+    () => [backgroundColor, highlightColor, backgroundColor],
+    [backgroundColor, highlightColor]
+  );
+
+  return (
+    <View style={[styles.container, { height, width, backgroundColor }, style]}>
+      <Animated.View
+        style={[
+          StyleSheet.absoluteFill,
+          {
+            transform: [{ translateX }],
+          },
+        ]}
+      >
+        <LinearGradient
+          style={styles.gradient}
+          colors={gradientColors}
+          start={GRADIENT_START}
+          end={GRADIENT_END}
+        />
+      </Animated.View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    overflow: "hidden",
+    borderRadius: 16,
+  },
+  gradient: {
+    flex: 1,
+  },
+});
+
+
+
+export const highlightText = (text, query) => {
+
+  const styles = StyleSheet.create({
+    normalText: {
+      color: 'rgba(255, 255, 255, 0.8)', 
+      fontFamily: 'Poppins-Regular',
+    },
+    highlightedText: {
+      backgroundColor: 'yellow',
+      fontWeight: 'bold',
+      color: '#000',
+    },
+  });
+
+
+  if (!query) return <Text style={styles.normalText}>{text}</Text>;
+
+  // Divide el texto en palabras
+  const words = text.split(' ');
+
+  return words.map((word, index) => {
+    const containsQuery = word.toLowerCase().includes(query.toLowerCase());
+    return (
+      <Text
+        key={index}
+        style={containsQuery ? styles.highlightedText : styles.normalText}
+      >
+        {word}{' '}
+      </Text>
+    );
+  });
+};
 
 
 

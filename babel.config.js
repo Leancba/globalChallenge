@@ -4,12 +4,8 @@ module.exports = {
     [
       require.resolve('babel-plugin-module-resolver'),
       {
-        root: ["./src/"],
-        alias: {
-          "services": "./services/",
-          "helpers": "./helpers/"
-        }
+        root: ["./src"],
       }
     ],
-  ]
+  ],
 };

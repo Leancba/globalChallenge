@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { Button } from 'react-native-paper';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor='#121b22' />
       
-      {/* <Image source={require('../../assets/icon.jpeg')} style={styles.image} /> */}
-
-      <Text style={styles.title}>Te damos la bienvenida a GlobalChat</Text>
+      <Text style={styles.title}>Te damos la bienvenida a GlobalChatApp</Text>
       <Text style={styles.subtitle}>
-        Recomendamos usar este servicio con responsabilidad para disfrutar de la experiencia que proporciona esta app desarrollada con cariño.
+        Recomendamos usar este servicio con responsabilidad para disfrutar de la experiencia que proporciona esta app desarrollada Global Think Technology.
       </Text>
       <Text style={styles.terms}>
         Consulta nuestra Política de privacidad. Pulsa "Aceptar y continuar" para aceptar las Condiciones del servicio.

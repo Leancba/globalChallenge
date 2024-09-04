@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Login from "./src/components/login";
 import Container from "./src/components/container";
-import { checkToken, toastProviderConfig } from "@helpers/index";
+import { checkToken, toastProviderConfig } from "helpers";
 
 
 
@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor='#028ab9' />
+      
 
       <ToastProvider {...toastProviderConfig}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>

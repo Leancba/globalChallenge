@@ -8,16 +8,14 @@ const Stack = createNativeStackNavigator();
 const MainNavigator = () => {
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={false ? "Welcome" : "SignIn"}>
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={true ? "Welcome" : "SignIn"}>
       <Stack.Screen 
         name="SignIn" 
-        component={SignInComponent} 
-        options={{ title: 'Iniciar Sesión' }} 
+        component={SignInComponent}
       />
       <Stack.Screen 
         name="Welcome" 
         component={WelcomeScreen} 
-        options={{ title: 'Hola Mundo' }} 
       />
     </Stack.Navigator>
   );

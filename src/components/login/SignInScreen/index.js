@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, StyleSheet, Image, StatusBar } from "react-native";
 import { TextInput, Text, Button } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
 import icon from '../../assets/icon.png';
@@ -8,7 +8,7 @@ import { inputSignIn } from "./inputs";
 import { SignIn } from "services/userDataApi";
 
 const SignInComponent = ({ navigation }) => {
-  
+
   const toast = useToast();
   const [Loading, setLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -23,9 +23,9 @@ const SignInComponent = ({ navigation }) => {
   const { username, password } = watch();
 
   const onSignIn = async () => {
-    
+
     setLoading(true);
-  
+
     try {
       await SignIn(username, password);
       toast.show("¡Bienvenido a GlobalChat!", { type: "warning" });
@@ -36,13 +36,15 @@ const SignInComponent = ({ navigation }) => {
       setLoading(false);
     }
   };
-  
+
 
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, width: '100%' }}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
+
+      <StatusBar barStyle="light-content" backgroundColor='#ff6563' />
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
       >
@@ -102,7 +104,7 @@ const SignInComponent = ({ navigation }) => {
           style={styles.surfaceButton}
           icon={"login"}
           loading={Loading}
-          onPress={handleSubmit(onSignIn)} // Vinculamos el botón a la función de inicio de sesión
+          onPress={handleSubmit(onSignIn)}
           labelStyle={styles.labelStyle}
         >
           Iniciar sesión

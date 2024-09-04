@@ -4,7 +4,8 @@ import { Avatar, Button } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { useToast } from "react-native-toast-notifications";
 import { UpdateUserData } from "services/userDataApi";
-import { avatares } from "helper/index";
+
+import { avatares } from "helpers";
 
 
 export default function AvatarModal({ userData, avatarModal, setAvatarModal }) {
@@ -48,7 +49,7 @@ export default function AvatarModal({ userData, avatarModal, setAvatarModal }) {
             <View style={styles.header}>
               <Text style={styles.title}>Selecciona un avatar</Text>
               <Text style={styles.subtitle}>
-                Puedes seleccionar un avatar de la lista para establecerlo como el avatar de tu cuenta Propital
+                Puedes seleccionar un avatar de la lista para establecerlo como el avatar de tu GlobalChat
               </Text>
             </View>
 
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontFamily: 'Poppins-SemiBold',
-    color: '#0084FE',
+    color: '#028ab9',
   },
   subtitle: {
     fontFamily: 'Poppins-Regular',
@@ -147,14 +148,14 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   cancelButton: {
-    borderColor: '#0084FE',
+    borderColor: '#028ab9',
     borderWidth: 2,
     backgroundColor: 'white',
     flex: 1,
     marginHorizontal: 5,
   },
   saveButton: {
-    backgroundColor: '#0084FE',
+    backgroundColor: '#028ab9',
     borderColor: '#0084FE',
     borderWidth: 1,
     flex: 1,

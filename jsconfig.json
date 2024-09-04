@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
-      "@services/*": [
-        "src/services/*"
-      ],
-      "@helpers/*": [
-        "src/helpers/*"
-      ]
+      "@utils": ["helpers/"],
+      "@services": ["services/"],
     }
   }
-}
+} 
