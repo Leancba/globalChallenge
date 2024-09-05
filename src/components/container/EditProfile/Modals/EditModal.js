@@ -41,6 +41,7 @@ const EditModal = ({
       >
         <Title style={styles.title}>{`Editar ${editingField}`}</Title>
         <TextInput
+        textColor="black"
           value={fieldValue}
           onChangeText={setFieldValue}
           style={styles.input}
@@ -49,10 +50,10 @@ const EditModal = ({
         />
         <View style={styles.buttonContainer}>
           <Button loading={loading} mode="contained" onPress={handleSave} style={styles.button}>
-            Save
+            Guardar
           </Button>
-          <Button mode="contained" onPress={hideModal} style={styles.button}>
-            Cancel
+          <Button labelStyle={{color:'white'}} mode="contained" onPress={hideModal} style={styles.button}>
+            Cancelar
           </Button>
         </View>
       </Modal>

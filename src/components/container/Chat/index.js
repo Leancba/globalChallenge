@@ -90,6 +90,7 @@ const ChatDetailScreen = ({ route, navigation }) => {
 
       <View style={styles.inputContainer}>
         <TextInput
+        textColor="black"
           style={styles.textInput}
           placeholder="Escribe un mensaje"
           placeholderTextColor="#aaa"

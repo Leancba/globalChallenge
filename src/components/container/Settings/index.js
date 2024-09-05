@@ -11,7 +11,7 @@ const Settings = ({ navigation }) => {
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.clear();
+      await AsyncStorage.removeItem('token');
       navigation.reset({
         index: 0,
         routes: [{ name: 'Login' }]

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, ScrollView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Appbar,Searchbar, List, Avatar, Text } from 'react-native-paper';
+import { Appbar, Searchbar, List, Avatar, Text } from 'react-native-paper';
 import { getUserData } from 'services/userDataApi';
 import { getChats } from 'services/chatsApi';
 import { CustomAlert, Skeleton, highlightText, Logo } from 'helpers';
@@ -91,7 +91,8 @@ const ChatListScreen = ({ navigation }) => {
 
       <Searchbar
         placeholder="Buscar"
-        iconColor="#F15A50" 
+        iconColor="#F15A50"
+        inputStyle={{color:'black'}} 
         onChangeText={(text) => setSearchQuery(text)}
         value={searchQuery}
         style={styles.searchbar}
@@ -143,6 +144,7 @@ const ChatListScreen = ({ navigation }) => {
                     <List.Item
                       key={chat.id}
                       title={chat.contact}
+                      titleStyle={styles.listItemTitle}
                       description={chat.lastMessage}
                       descriptionNumberOfLines={1}
                       left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
@@ -165,13 +167,13 @@ const ChatListScreen = ({ navigation }) => {
                     <List.Item
                       key={chat.id}
                       title={chat.contact}
+                      titleStyle={styles.listItemTitle}
                       description={() => (
                         <Text style={styles.descriptionContainer}>
                           {highlightText(chat.lastMessage, searchQuery)}
                         </Text>
                       )}
                       descriptionNumberOfLines={1}
-                      left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
                       right={() => (
                         <View style={styles.listItemRight}>
                           <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
@@ -182,6 +184,12 @@ const ChatListScreen = ({ navigation }) => {
                     />
                   ))}
                 </>
+              )}
+
+              {filteredChatsByName.length === 0 && filteredChatsByMessage.length === 0 && (
+                <View style={styles.noResultsContainer}>
+                  <Text style={styles.noResultsText}>No hay resultados en los chats ni contactos</Text>
+                </View>
               )}
             </>
           )}
@@ -212,7 +220,7 @@ const styles = StyleSheet.create({
     margin: 8,
     backgroundColor: '#FFFFFF', 
     borderWidth: 1,
-    borderColor: '#F07A50', 
+    borderColor: '#F07A50',
   },
   skeletonContainer: {
     flexDirection: 'row',
@@ -255,6 +263,17 @@ const styles = StyleSheet.create({
   avatar: {
     marginRight: 10,  
     backgroundColor: 'transparent',  
+  },
+  noResultsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  noResultsText: {
+    color: '#999999',
+    fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
+    textAlign:'center'
   },
 });
 

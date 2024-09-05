@@ -78,6 +78,7 @@ const SignInComponent = ({ navigation }) => {
                   label={field.title}
                   secureTextEntry={field.name === "password" && !isPasswordVisible}
                   value={value}
+                  textColor="black"
                   onChangeText={onChange}
                   theme={{
                     colors: {
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 12,
     fontWeight: "bold",
-    color: "black",
+    color: "orange",
     width: "100%",
     backgroundColor: "white",
     borderTopRightRadius: 30,
