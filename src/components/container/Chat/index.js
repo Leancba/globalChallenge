@@ -10,16 +10,11 @@ const ChatDetailScreen = ({ route, navigation }) => {
   const flatListRef = useRef(null);
   const contactName = chat.contact;
 
-
-  //OBTIENE MENSAJE SI HUBO CONVERSACION, ALOJADA EN LOCAL
-
+  // OBTIENE MENSAJE SI HUBO CONVERSACION, ALOJADA EN LOCAL
   useEffect(() => {
-    
     const fetchMessages = async () => {
-
       try {
         const storedMessages = await AsyncStorage.getItem(contactName);
-
         if (storedMessages) {
           setMessages(JSON.parse(storedMessages));
         } else {
@@ -33,8 +28,7 @@ const ChatDetailScreen = ({ route, navigation }) => {
     fetchMessages();
   }, [chat.messages, contactName]);
 
-  //SETEA CONVERSACION EN EL LOCALSTORAGE
-
+  // SETEA CONVERSACION EN EL LOCALSTORAGE
   const storeMessages = async (newMessages) => {
     try {
       await AsyncStorage.setItem(contactName, JSON.stringify(newMessages));
@@ -43,11 +37,8 @@ const ChatDetailScreen = ({ route, navigation }) => {
     }
   };
 
-  //ENVIA MENSAJE, CONVIERTE LOS DATOS, LOS UNIFICA, LOS SETEA EN ESTADO, LO PASA AL LOCAL , LIMPIA EL INPUT Y 
-  //EJECUTA EL SCROLL HACIA EL ULTIMO MENSAJE SIMIL WHATS APP
-
+  // ENVIA MENSAJE Y GUARDA EN LOCAL STORAGE
   const sendMessage = () => {
-
     if (inputText.trim()) {
       const newMessage = {
         sender: 'You',
@@ -57,7 +48,7 @@ const ChatDetailScreen = ({ route, navigation }) => {
 
       const updatedMessages = [...messages, newMessage];
       setMessages(updatedMessages);
-      storeMessages(updatedMessages); 
+      storeMessages(updatedMessages);
       setInputText('');
       flatListRef.current.scrollToEnd({ animated: true });
     }
@@ -81,7 +72,12 @@ const ChatDetailScreen = ({ route, navigation }) => {
       <Appbar.Header style={styles.header}>
         <Appbar.BackAction color="#fff" onPress={() => navigation.goBack()} />
         <Avatar.Image size={40} source={{ uri: chat.avatar }} />
-        <Appbar.Content title={chat.contact} titleStyle={styles.headerTitle} />
+        
+        {/* Organiza el título y subtítulo en columna */}
+        <View style={styles.headerContent}>
+          <Text style={styles.headerTitle}>{chat.contact}</Text>
+          <Text style={styles.headerSubTitle}>{chat.lastTime}</Text>
+        </View>
       </Appbar.Header>
 
       <FlatList
@@ -96,7 +92,7 @@ const ChatDetailScreen = ({ route, navigation }) => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder="Type a message"
+          placeholder="Escribe un mensaje"
           placeholderTextColor="#aaa"
           value={inputText}
           onChangeText={setInputText}
@@ -117,19 +113,30 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
     width: '100%',
-    backgroundColor: '#00749c',
+    backgroundColor: '#FFFFFF', // Fondo blanco para la pantalla de chat
   },
   header: {
-    backgroundColor: '#028ab9',
+    backgroundColor: '#F15A50', // Rojo coral (Primario) para la cabecera
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10, // Ajusta el espacio alrededor
+  },
+  headerContent: {
+    flexDirection: 'column',
+    marginLeft: 10, // Espacio entre el avatar y el texto
   },
   headerTitle: {
     color: '#fff',
+    fontSize: 18,
     fontFamily: 'Poppins-Regular',
-    marginLeft: 10,
+  },
+  headerSubTitle: {
+    color: 'rgba(255, 255, 255, 0.8)', // Texto blanco con opacidad para la última vez visto
+    fontSize: 12,
   },
   container: {
     padding: 10,
-    backgroundColor: '#00749c',
+    backgroundColor: '#FFFFFF', // Fondo blanco
     flexGrow: 1,
     justifyContent: 'flex-start',
   },
@@ -149,43 +156,43 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   bubbleLeft: {
-    backgroundColor: '#028ab9',
+    backgroundColor: 'rgba(241, 90, 80, 0.2)', // Rojo coral con opacidad para los mensajes recibidos
     alignSelf: 'flex-start',
   },
   bubbleRight: {
-    backgroundColor: 'grey',
+    backgroundColor: '#E0E0E0', // Gris claro para los mensajes enviados
     alignSelf: 'flex-end',
   },
   messageText: {
-    color: '#fff',
+    color: '#333333', // Texto oscuro para contraste
   },
   time: {
     fontSize: 10,
     marginTop: 5,
     textAlign: 'right',
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(0, 0, 0, 0.5)', // Tiempo en gris suave para mejor contraste
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#028ab9',
+    backgroundColor: '#FF8C7A', // Rosa salmón para la barra de entrada de texto
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   textInput: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: '#F15A50', // Borde rojo coral (Primario)
     borderRadius: 20,
     paddingHorizontal: 15,
     paddingVertical: 10,
     marginRight: 10,
     backgroundColor: '#fff',
-    color: '#000',
+    color: '#000', // Texto negro en el input
   },
   sendButton: {
-    backgroundColor: '#00749c',
+    backgroundColor: '#F15A50', // Botón de envío rojo coral
   },
 });
 

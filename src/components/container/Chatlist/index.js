@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import { View, SafeAreaView, ScrollView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Appbar, Menu, Searchbar, List, Avatar, Text, Button } from 'react-native-paper';
 import { getUserData } from 'services/userDataApi';
 import { getChats } from 'services/chatsApi';
-import { CustomAlert, Skeleton, highlightText} from 'helpers';
+import { CustomAlert, Skeleton, highlightText, Logo } from 'helpers';
 
 const ChatListScreen = ({ navigation }) => {
 
@@ -34,7 +34,6 @@ const ChatListScreen = ({ navigation }) => {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     if (searchQuery) {
       const nameResults = chats.filter((chat) =>
@@ -54,7 +53,6 @@ const ChatListScreen = ({ navigation }) => {
   }, [searchQuery, chats]);
 
   const handleNavigateAndCloseMenu = (screen, params) => {
-
     setMenuVisible(false);
     setSelectedChat(null);
     navigation.navigate(screen, params);
@@ -80,32 +78,20 @@ const ChatListScreen = ({ navigation }) => {
         ) : (
           <>
             <Appbar.Content title="GlobalChat" titleStyle={styles.appbarTitle} />
-            <Menu
-              visible={menuVisible}
-              onDismiss={() => setMenuVisible(false)}
-              anchor={
-                <Appbar.Action
-                  icon="dots-vertical"
-                  color="#fff"
-                  onPress={() => setMenuVisible(true)}
-                />
-              }
-            >
-              <Button
-                icon={"cog"}
-                labelStyle={styles.menuButtonLabel}
-                onPress={() => handleNavigateAndCloseMenu('Settings')}
-              >
-                Ajustes
-              </Button>
-            </Menu>
+            <TouchableOpacity onPress={() => handleNavigateAndCloseMenu('Settings')}>
+              <Avatar.Image
+                size={35}
+                source={Logo}
+                style={styles.avatar}
+              />
+            </TouchableOpacity>
           </>
         )}
       </Appbar.Header>
 
       <Searchbar
-        placeholder="Search"
-        iconColor="#ffffff"
+        placeholder="Buscar"
+        iconColor="#F15A50" // Rojo coral (Primario)
         onChangeText={(text) => setSearchQuery(text)}
         value={searchQuery}
         style={styles.searchbar}
@@ -140,7 +126,7 @@ const ChatListScreen = ({ navigation }) => {
               left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
               right={() => (
                 <View style={styles.listItemRight}>
-                  <Text>{chat.lastMessageTime}</Text>
+                  <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
                 </View>
               )}
               onPress={() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat })}
@@ -162,7 +148,7 @@ const ChatListScreen = ({ navigation }) => {
                       left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
                       right={() => (
                         <View style={styles.listItemRight}>
-                          <Text>{chat.lastMessageTime}</Text>
+                          <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
                         </View>
                       )}
                       onPress={() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat })}
@@ -188,7 +174,7 @@ const ChatListScreen = ({ navigation }) => {
                       left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
                       right={() => (
                         <View style={styles.listItemRight}>
-                          <Text>{chat.lastMessageTime}</Text>
+                          <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
                         </View>
                       )}
                       onPress={() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat })}
@@ -208,10 +194,10 @@ const ChatListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#00749c',
+    backgroundColor: '#FFFFFF', // Fondo blanco
   },
   appbarHeader: {
-    backgroundColor: '#028ab9',
+    backgroundColor: '#F15A50', // Rojo coral (Primario)
   },
   appbarTitle: {
     marginLeft: 10,
@@ -219,12 +205,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
   menuButtonLabel: {
-    color: '#00749c',
+    color: '#FF8C7A', // Rosa salmón (Cuaternario)
     fontFamily: 'Poppins-SemiBold',
   },
   searchbar: {
     margin: 8,
-    backgroundColor: '#028ab9',
+    backgroundColor: '#FFFFFF', // Fondo blanco
+    borderWidth: 1,
+    borderColor: '#F07A50', // Naranja suave (Secundario)
   },
   skeletonContainer: {
     flexDirection: 'row',
@@ -241,24 +229,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   listItemTitle: {
-    color: '#fff',
+    color: '#333333', // Texto oscuro para contraste
     fontFamily: 'Poppins-Regular',
   },
   listItemDescription: {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#666666', // Texto secundario oscuro
     fontFamily: 'Poppins-Regular',
+  },
+  listItemRight: {
+    justifyContent: 'center',
+  },
+  listItemTime: {
+    color: '#999999',
   },
   descriptionContainer: {
     flexDirection: 'row',
     flexShrink: 1,
     flexWrap: 'wrap',
   },
-  listItemRight: {
-    justifyContent: 'center',
-  },
   filteredText: {
     fontWeight: 'bold',
     marginTop: 16,
+    color: '#F15A50', 
+  },
+  avatar: {
+    marginRight: 10,  // Ajusta el margen derecho para dar espacio al Avatar
+    backgroundColor: 'transparent',  // Asegúrate de que el fondo sea transparente si no quieres que tenga color de fondo
   },
 });
 

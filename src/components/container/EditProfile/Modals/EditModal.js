@@ -39,7 +39,7 @@ const EditModal = ({
         onDismiss={hideModal}
         contentContainerStyle={styles.modalContainer}
       >
-        <Title style={styles.title}>{`Edit ${editingField}`}</Title>
+        <Title style={styles.title}>{`Editar ${editingField}`}</Title>
         <TextInput
           value={fieldValue}
           onChangeText={setFieldValue}
@@ -49,10 +49,10 @@ const EditModal = ({
         />
         <View style={styles.buttonContainer}>
           <Button loading={loading} mode="contained" onPress={handleSave} style={styles.button}>
-            Save
+            Guardar
           </Button>
           <Button mode="contained" onPress={hideModal} style={styles.button}>
-            Cancel
+            Cancelar
           </Button>
         </View>
       </Modal>
@@ -62,7 +62,7 @@ const EditModal = ({
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: '#028ab9',
+    backgroundColor: '#FFFFFF', // Fondo blanco
     padding: 20,
     borderRadius: 10,
     position: 'absolute',
@@ -75,21 +75,26 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 5,
     fontFamily: 'Poppins-SemiBold',
-    color: '#fff',
+    color: '#F15A50', // Texto en rojo coral
   },
   input: {
     marginBottom: 16,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF', // Fondo blanco para el input
+    color: '#333333', // Texto oscuro en el input
   },
   customOutlineStyle: {
-    borderColor: '#fff',
+    borderColor: '#F15A50', // Borde rojo coral
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
   button: {
-    backgroundColor: '#00749c',
+    backgroundColor: '#F15A50', // Botón rojo coral
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    color: '#FFFFFF', // Texto blanco en los botones
   },
 });
 

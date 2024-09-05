@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Modal, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 import { useDispatch } from "react-redux";
@@ -7,16 +7,15 @@ import { UpdateUserData } from "services/userDataApi";
 
 import { avatares } from "helpers";
 
-
 export default function AvatarModal({ userData, avatarModal, setAvatarModal }) {
 
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const [AvatarUrl, setAvatarUrl] = React.useState(null);
-  const [Loading, setLoading] = React.useState(false);
+  const [AvatarUrl, setAvatarUrl] = useState(null);
+  const [Loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (avatares.includes(userData.avatar)) {
       setAvatarUrl(userData.avatar);
     }
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF", // Fondo blanco
     borderRadius: 10,
     padding: 15,
     alignItems: 'center',
@@ -119,12 +118,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontFamily: 'Poppins-SemiBold',
-    color: '#028ab9',
+    color: '#F15A50', // Rojo coral para el título
   },
   subtitle: {
     fontFamily: 'Poppins-Regular',
     fontSize: 18,
-    color: '#08164C',
+    color: '#333333', // Texto oscuro para subtítulo
     textAlign: 'center',
     marginTop: 10,
   },
@@ -148,26 +147,24 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   cancelButton: {
-    borderColor: '#028ab9',
+    borderColor: '#F15A50', // Rojo coral para el borde
     borderWidth: 2,
-    backgroundColor: 'white',
+    backgroundColor: 'white', // Fondo blanco
     flex: 1,
     marginHorizontal: 5,
   },
   saveButton: {
-    backgroundColor: '#028ab9',
-    borderColor: '#0084FE',
-    borderWidth: 1,
+    backgroundColor: '#F15A50', // Botón rojo coral
     flex: 1,
     marginHorizontal: 5,
   },
   textCancel: {
-    color: '#0084FE',
+    color: '#F15A50', // Texto rojo coral
     fontSize: 13,
     fontFamily: 'Poppins-SemiBold',
   },
   textSave: {
-    color: 'white',
+    color: 'white', // Texto blanco para el botón de guardar
     fontSize: 13,
     fontFamily: 'Poppins-SemiBold',
   },

@@ -5,11 +5,17 @@ import { Avatar, Appbar } from "react-native-paper";
 import { Alert, Animated, View, StyleSheet, Easing, Text } from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
 
+import Logo from '../../assets/icon.png';
+
+
+export { Logo };
+
+
 export const checkToken = async (navigation) => {
 
   try {
     const token = await AsyncStorage.getItem('token');
-  
+
     if (token) {
 
       navigation.reset({
@@ -51,10 +57,20 @@ export const CustomAppBar = ({ route, navigation }) => {
 
   const { headerTitle } = route.params || {};
 
+  const styles = {
+    appbarHeader: {
+      backgroundColor: '#F15A50', // Rojo coral (Primario)
+    },
+    headerTitle: {
+      color: '#fff', // Texto blanco para contraste
+      fontFamily: 'Poppins-SemiBold',
+    },
+  };
+
   return (
-    <Appbar.Header style={{ backgroundColor: '#028ab9' }} >
+    <Appbar.Header style={styles.appbarHeader}>
       <Appbar.BackAction color="#fff" onPress={() => navigation.goBack()} />
-      <Appbar.Content titleStyle={{ color: '#fff' }} title={headerTitle || "App"} />
+      <Appbar.Content titleStyle={styles.headerTitle} title={headerTitle || "App"} />
     </Appbar.Header>
   );
 };
@@ -88,6 +104,7 @@ export const CustomAlert = ({ selectedChat, setSelectedChat, dispatch, chats }) 
 };
 
 export const avatares = [
+  "https://img.freepik.com/premium-photo/3d-character-avatar_113255-5314.jpg",
   "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-1.jpg",
   "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-2.jpg",
   "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-3.jpg",
@@ -110,8 +127,8 @@ const GRADIENT_END = { x: 1, y: 0 };
 export const Skeleton = ({
   height,
   width,
-  backgroundColor="#00749c" , // Powder Blue
-  highlightColor="#028ab9" ,
+  backgroundColor = '#fff',
+  highlightColor = 'rgba(241, 90, 80, 0.1)',
   speed = 800,
   style, // Add style prop here
 }) => {
@@ -172,37 +189,26 @@ const styles = StyleSheet.create({
 
 
 export const highlightText = (text, query) => {
+  if (!query) return <Text>{text}</Text>;
 
-  const styles = StyleSheet.create({
-    normalText: {
-      color: 'rgba(255, 255, 255, 0.8)', 
-      fontFamily: 'Poppins-Regular',
-    },
-    highlightedText: {
-      backgroundColor: 'yellow',
-      fontWeight: 'bold',
-      color: '#000',
-    },
-  });
+  const escapedQuery = query.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 
+  const regex = new RegExp(`(${escapedQuery})`, 'gi');
+  
+  const parts = text.split(regex);
 
-  if (!query) return <Text style={styles.normalText}>{text}</Text>;
-
-  // Divide el texto en palabras
-  const words = text.split(' ');
-
-  return words.map((word, index) => {
-    const containsQuery = word.toLowerCase().includes(query.toLowerCase());
-    return (
-      <Text
-        key={index}
-        style={containsQuery ? styles.highlightedText : styles.normalText}
-      >
-        {word}{' '}
+  return parts.map((part, index) =>
+    regex.test(part) ? (
+      <Text key={index} style={{ backgroundColor: 'rgba(241, 90, 80, 0.2)', color: '#F15A50', fontWeight: 'bold' }}>
+        {part}
       </Text>
-    );
-  });
+    ) : (
+      <Text key={index} style={{ color: '#333333' }}>{part}</Text>
+    )
+  );
 };
+
+
 
 
 

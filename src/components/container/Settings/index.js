@@ -11,12 +11,11 @@ const Settings = ({ navigation }) => {
 
   const handleLogout = async () => {
     try {
-
       await AsyncStorage.clear();
-
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Login' }]});
+        routes: [{ name: 'Login' }]
+      });
     } catch (error) {
       console.error('Error cerrando sesión:', error);
     }
@@ -48,7 +47,7 @@ const Settings = ({ navigation }) => {
         description="Cambiar nombre, actualizar avatar"
         descriptionStyle={styles.descriptionStyle}
         left={() => (
-          <List.Icon color={'#fff'} icon="cog" />
+          <List.Icon color={'#F15A50'} icon="cog" /> // Icono en color primario
         )}
       />
 
@@ -57,9 +56,9 @@ const Settings = ({ navigation }) => {
       <List.Item
         style={styles.listItem}
         title="Cerrar sesión"
-        titleStyle={styles.titleStyle}
+        titleStyle={styles.logoutTitle}
         left={() => (
-          <List.Icon color={'#fff'} icon="door-closed-lock" />
+          <List.Icon color={'#fff'} icon="door-closed-lock" /> // Icono en color primario
         )}
         onPress={handleLogout}
       />
@@ -70,23 +69,31 @@ const Settings = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00749c',
+    backgroundColor: '#FFFFFF', // Fondo blanco para un diseño limpio
   },
   listItem: {
     padding: 10,
-    backgroundColor: '#028ab9',
+    backgroundColor: '#FF8C7A', // Fondo rosa salmón para items generales
+  },
+  listItemLogout: {
+    padding: 10,
+    backgroundColor: '#F15A50', // Rojo coral para el ítem de cerrar sesión
   },
   titleStyle: {
-    color: '#fff',
+    color: '#333333', // Texto oscuro para contraste
+    fontFamily: 'Poppins-SemiBold',
+  },
+  logoutTitle: {
+    color: '#fff', // Texto blanco para el ítem de cerrar sesión
     fontFamily: 'Poppins-SemiBold',
   },
   descriptionStyle: {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(0, 0, 0, 0.6)', // Texto gris oscuro para descripciones
     fontFamily: 'Poppins-Regular',
   },
   divider: {
-    backgroundColor: '#fff',
-    height: 0.3,
+    backgroundColor: '#F15A50', // Divider en color primario para marcar separación
+    height: 1,
   },
 });
 

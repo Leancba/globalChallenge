@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Avatar, IconButton, List} from 'react-native-paper';
+import { Avatar, IconButton, List } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 
 import AvatarModal from './Modals/AvatarModal';
 import EditModal from './Modals/EditModal';
 
-
-
 const UserProfile = () => {
 
-  const userData = useSelector((state) => state.userData)
-
+  const userData = useSelector((state) => state.userData);
 
   const [visible, setVisible] = useState(false);
   const [avatarModal, setAvatarModal] = useState(false);
@@ -28,8 +25,6 @@ const UserProfile = () => {
   const hideModal = () => {
     setVisible(false);
   };
-
- 
 
   return (
     <View style={styles.container}>
@@ -49,15 +44,15 @@ const UserProfile = () => {
       {/* List for Name */}
       <List.Item
         title={userData.name}
-        style={{ paddingRight: 0 }}
+        style={styles.listItem}
         description="Nombre"
         titleStyle={styles.listTitleStyle}
         descriptionStyle={styles.listDescriptionStyle}
-        left={() => <List.Icon color="#fff" icon="account" />}
+        left={() => <List.Icon color="#F15A50" icon="account" />} 
         right={() => (
           <IconButton
             icon="pencil"
-            color="#fff"
+            color="#F15A50"
             onPress={() => showModal('name', userData.name)}
           />
         )}
@@ -66,15 +61,15 @@ const UserProfile = () => {
       {/* List for Status */}
       <List.Item
         title={userData.status}
+        style={styles.listItem}
         description="Estado"
-        style={{ paddingRight: 0 }}
         titleStyle={styles.listTitleStyle}
         descriptionStyle={styles.listDescriptionStyle}
-        left={() => <List.Icon color="#fff" icon="information" />}
+        left={() => <List.Icon color="#F15A50" icon="information" />} 
         right={() => (
           <IconButton
             icon="pencil"
-            color="#fff"
+            color="#F15A50"
             onPress={() => showModal('Status', userData.status)}
           />
         )}
@@ -83,19 +78,20 @@ const UserProfile = () => {
       {/* List for Phone */}
       <List.Item
         title={userData.phone}
+        style={styles.listItem}
         description="Teléfono"
-        style={{ paddingRight: 0 }}
         titleStyle={styles.listTitleStyle}
         descriptionStyle={styles.listDescriptionStyle}
-        left={() => <List.Icon color="#fff" icon="phone" />}
+        left={() => <List.Icon color="#F15A50" icon="phone" />} 
         right={() => (
           <IconButton
             icon="pencil"
-            color="#fff"
+            color="#F15A50"
             onPress={() => showModal('phone', userData.phone)}
           />
         )}
       />
+
       <EditModal
         visible={visible}
         hideModal={hideModal}
@@ -109,8 +105,6 @@ const UserProfile = () => {
         avatarModal={avatarModal}
         setAvatarModal={setAvatarModal}
       />
-
-
     </View>
   );
 };
@@ -118,56 +112,37 @@ const UserProfile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    padding: 15,
-    backgroundColor: '#00749c', // Fondo principal en azul
+    backgroundColor: '#FF8C7A', // Fondo rosa salmón para items generales
+    padding: 20,
     alignItems: 'center',
   },
   avatarContainer: {
     marginBottom: 20,
+    alignItems: 'center',
   },
   iconButton: {
     position: 'absolute',
     bottom: 0,
     right: 0,
-    backgroundColor: '#fff', // Fondo blanco para el ícono
+    backgroundColor: '#F15A50', // Botón de cámara con rojo coral (Primario)
     borderRadius: 50,
   },
+  listItem: {
+    backgroundColor: '#FFB199', // Fondo más claro para los ítems (Tercera capa)
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    marginBottom: 10,
+    width: '100%',
+  },
   listTitleStyle: {
-    color: '#fff', // Títulos en blanco
+    color: '#fff', // Títulos en blanco para contraste
     fontFamily: 'Poppins-SemiBold',
   },
   listDescriptionStyle: {
-    color: 'rgba(255, 255, 255, 0.8)', // Descripciones con opacidad del 80%
+    color: 'rgba(255, 255, 255, 0.8)', // Texto más claro para la descripción
     fontFamily: 'Poppins-Regular',
   },
-  modalContainer: {
-    backgroundColor: '#028ab9', // Fondo del modal en azul más claro
-    padding: 20,
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  input: {
-    marginBottom: 10,
-    backgroundColor: '#fff', // Input de texto con fondo blanco
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  button: {
-    marginTop: 10,
-    backgroundColor: '#028ab9', // Fondo azul claro para los botones
-  },
-  customOutlineStyle: {
-    padding: 20,
-    borderRadius: 10,
-    borderColor: "white",
-    borderWidth: 2,
-  }
 });
 
 export default UserProfile;
