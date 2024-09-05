@@ -246,6 +246,7 @@ const styles = StyleSheet.create({
   },
   listItemRight: {
     justifyContent: 'center',
+    paddingLeft:10
   },
   listItemTime: {
     color: '#999999',
