@@ -44,7 +44,7 @@ const SignInComponent = ({ navigation }) => {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
 
-      <StatusBar barStyle="light-content" backgroundColor='#ff6563' />
+      <StatusBar barStyle="light-content" backgroundColor="#F15A50" />
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
       >
@@ -66,16 +66,22 @@ const SignInComponent = ({ navigation }) => {
                   secureTextEntry={field.name === "password" && !isPasswordVisible}
                   value={value}
                   onChangeText={onChange}
+                  theme={{
+                    colors: {
+                      onSurfaceVariant: '#F15A50',
+                      primary: '#F15A50'
+                    }
+                  }}
                   left={
                     <TextInput.Icon
                       icon={field.icon}
-                      color={'#0186b3'}
+                      color={"#F15A50"}
                     />
                   }
                   right={
                     field.name === "password" && (
                       <TextInput.Icon
-                        color={isPasswordVisible ? "#0186b3" : "black"}
+                        color={isPasswordVisible ? "#F15A50" : "black"}
                         size={20}
                         icon={"eye"}
                         onPress={() => setIsPasswordVisible(!isPasswordVisible)}
@@ -119,7 +125,7 @@ const SignInComponent = ({ navigation }) => {
         <TouchableOpacity >
           <Text style={styles.forgetText}>
             ¿No tienes una cuenta?{" "}
-            <Text style={{ ...styles.registerButton, color: '#ff6563' }}>Registrate</Text>
+            <Text style={{ ...styles.registerButton, color: "#F15A50" }}>Registrate</Text>
           </Text>
         </TouchableOpacity>
 
@@ -187,7 +193,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 15,
     paddingHorizontal: 20,
-    backgroundColor: "#0186b3",
+    backgroundColor: "#F15A50",
     borderRadius: 20,
   },
   invitedButton: {
