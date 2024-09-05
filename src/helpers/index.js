@@ -32,8 +32,11 @@ export const checkToken = async (navigation) => {
   } catch (error) {
     console.error("Error al verificar el token", error);
   } finally {
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 2000); 
   }
+  
 };
 
 export const toastProviderConfig = {

@@ -1,15 +1,27 @@
 import React from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { Button } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const WelcomeScreen = ({ navigation }) => {
+const WelcomeScreen = ({setShowModal}) => {
+
+  const handleAccept = async () => {
+    try {
+      await AsyncStorage.setItem('termsAccepted', 'true');
+      setShowModal(false)
+     
+    } catch (error) {
+      console.error("Error al guardar los términos aceptados en AsyncStorage", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor='#121b22' />
       
       <Text style={styles.title}>Te damos la bienvenida a GlobalChatApp</Text>
       <Text style={styles.subtitle}>
-        Recomendamos usar este servicio con responsabilidad para disfrutar de la experiencia que proporciona esta app desarrollada Global Think Technology.
+        Recomendamos usar este servicio con responsabilidad para disfrutar de la experiencia que proporciona esta app desarrollada por Global Think Technology.
       </Text>
       <Text style={styles.terms}>
         Consulta nuestra Política de privacidad. Pulsa "Aceptar y continuar" para aceptar las Condiciones del servicio.
@@ -17,7 +29,7 @@ const WelcomeScreen = ({ navigation }) => {
 
       <Button
         mode="contained"
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={handleAccept}
         style={styles.button}
         labelStyle={styles.buttonLabel}
       >

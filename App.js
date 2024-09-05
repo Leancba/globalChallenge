@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { StatusBar } from "react-native";
 import { ToastProvider } from 'react-native-toast-notifications';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
@@ -29,8 +28,8 @@ const App = () => {
 
       <ToastProvider {...toastProviderConfig}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Container" component={Container} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Container" component={Container} />
         </Stack.Navigator>
       </ToastProvider>
     </>

@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, StyleSheet, Image, StatusBar } from "react-native";
-import { TextInput, Text, Button } from "react-native-paper";
+import { TextInput, Text, Button, Modal, Portal } from "react-native-paper"; 
 import { useForm, Controller } from "react-hook-form";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import icon from '../../assets/icon.png';
 import { useToast } from "react-native-toast-notifications";
 import { inputSignIn } from "./inputs";
 import { SignIn } from "services/userDataApi";
 
-const SignInComponent = ({ navigation }) => {
+import WelcomeScreen from "../WelcomeScren";
 
+const SignInComponent = ({ navigation }) => {
   const toast = useToast();
-  const [Loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [showModal, setShowModal] = useState(false); 
 
   const { control, handleSubmit, watch, formState: { errors } } = useForm({
     defaultValues: {
@@ -22,14 +25,28 @@ const SignInComponent = ({ navigation }) => {
 
   const { username, password } = watch();
 
+  useEffect(() => {
+    const checkTermsAccepted = async () => {
+      const termsAccepted = await AsyncStorage.getItem('termsAccepted');
+      if (termsAccepted !== 'true') {
+        setShowModal(true);
+      }
+    };
+    checkTermsAccepted();
+  }, []);
+
+
+
   const onSignIn = async () => {
-
     setLoading(true);
-
     try {
       await SignIn(username, password);
       toast.show("¡Bienvenido a GlobalChat!", { type: "warning" });
-      navigation.navigate('Container');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Container' }],
+      });
+      
     } catch (error) {
       toast.show(error.message, { type: "danger" });
     } finally {
@@ -37,17 +54,13 @@ const SignInComponent = ({ navigation }) => {
     }
   };
 
-
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, width: '100%' }}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
-
       <StatusBar barStyle="light-content" backgroundColor="#F15A50" />
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.logoContainer}>
           <Image source={icon} style={styles.logo} />
         </View>
@@ -109,27 +122,35 @@ const SignInComponent = ({ navigation }) => {
         <Button
           style={styles.surfaceButton}
           icon={"login"}
-          loading={Loading}
+          loading={loading}
           onPress={handleSubmit(onSignIn)}
           labelStyle={styles.labelStyle}
         >
           Iniciar sesión
         </Button>
 
-        <TouchableOpacity style={{ width: '100%' }} >
+        <TouchableOpacity style={{ width: '100%' }}>
           <Text style={styles.forgetText}>
             ¿Olvidaste tu contraseña?
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity >
+        <TouchableOpacity>
           <Text style={styles.forgetText}>
             ¿No tienes una cuenta?{" "}
             <Text style={{ ...styles.registerButton, color: "#F15A50" }}>Registrate</Text>
           </Text>
         </TouchableOpacity>
-
       </ScrollView>
+
+      <Portal>
+        <Modal
+          visible={showModal}
+          contentContainerStyle={styles.modalContainer}>
+          <WelcomeScreen setShowModal={setShowModal} />
+        </Modal>
+      </Portal>
+
     </KeyboardAvoidingView>
   );
 };
@@ -196,14 +217,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F15A50",
     borderRadius: 20,
   },
-  invitedButton: {
-    marginTop: 15,
-    borderColor: '#0084FE',
-    backgroundColor: "transparent",
-    borderWidth: 2,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-  },
   registerButton: {
     fontSize: 14,
     fontFamily: 'Poppins-SemiBold',
@@ -230,5 +243,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "white",
     borderWidth: 2,
+  },
+  modalContainer: {
+    flex: 1,
+    width: '100%',
+  },
+  modalButton: {
+    marginTop: 20,
+    backgroundColor: '#F15A50',
+    borderRadius: 10,
+  },
+  modalButtonLabel: {
+    color: 'white',
+    fontSize: 16,
   }
 });
