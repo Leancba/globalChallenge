@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor='#121b22' />
+      <StatusBar barStyle="light-content" backgroundColor="#F15A50" />
 
       <Stack.Navigator
         initialRouteName="ChatList"

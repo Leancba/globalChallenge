@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, ScrollView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Appbar, Menu, Searchbar, List, Avatar, Text, Button } from 'react-native-paper';
+import { Appbar,Searchbar, List, Avatar, Text } from 'react-native-paper';
 import { getUserData } from 'services/userDataApi';
 import { getChats } from 'services/chatsApi';
 import { CustomAlert, Skeleton, highlightText, Logo } from 'helpers';
@@ -91,7 +91,7 @@ const ChatListScreen = ({ navigation }) => {
 
       <Searchbar
         placeholder="Buscar"
-        iconColor="#F15A50" // Rojo coral (Primario)
+        iconColor="#F15A50" 
         onChangeText={(text) => setSearchQuery(text)}
         value={searchQuery}
         style={styles.searchbar}
@@ -194,10 +194,10 @@ const ChatListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // Fondo blanco
+    backgroundColor: '#FFFFFF', 
   },
   appbarHeader: {
-    backgroundColor: '#F15A50', // Rojo coral (Primario)
+    backgroundColor: '#F15A50', 
   },
   appbarTitle: {
     marginLeft: 10,
@@ -205,14 +205,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
   menuButtonLabel: {
-    color: '#FF8C7A', // Rosa salmón (Cuaternario)
+    color: '#FF8C7A', 
     fontFamily: 'Poppins-SemiBold',
   },
   searchbar: {
     margin: 8,
-    backgroundColor: '#FFFFFF', // Fondo blanco
+    backgroundColor: '#FFFFFF', 
     borderWidth: 1,
-    borderColor: '#F07A50', // Naranja suave (Secundario)
+    borderColor: '#F07A50', 
   },
   skeletonContainer: {
     flexDirection: 'row',
@@ -229,11 +229,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   listItemTitle: {
-    color: '#333333', // Texto oscuro para contraste
+    color: '#333333', 
     fontFamily: 'Poppins-Regular',
   },
   listItemDescription: {
-    color: '#666666', // Texto secundario oscuro
+    color: '#666666',
     fontFamily: 'Poppins-Regular',
   },
   listItemRight: {
@@ -253,8 +253,8 @@ const styles = StyleSheet.create({
     color: '#F15A50', 
   },
   avatar: {
-    marginRight: 10,  // Ajusta el margen derecho para dar espacio al Avatar
-    backgroundColor: 'transparent',  // Asegúrate de que el fondo sea transparente si no quieres que tenga color de fondo
+    marginRight: 10,  
+    backgroundColor: 'transparent',  
   },
 });
 

@@ -49,10 +49,10 @@ const EditModal = ({
         />
         <View style={styles.buttonContainer}>
           <Button loading={loading} mode="contained" onPress={handleSave} style={styles.button}>
-            Guardar
+            Save
           </Button>
           <Button mode="contained" onPress={hideModal} style={styles.button}>
-            Cancelar
+            Cancel
           </Button>
         </View>
       </Modal>
@@ -62,7 +62,7 @@ const EditModal = ({
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: '#FFFFFF', // Fondo blanco
+    backgroundColor: '#FFFFFF', 
     padding: 20,
     borderRadius: 10,
     position: 'absolute',
@@ -75,26 +75,26 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 5,
     fontFamily: 'Poppins-SemiBold',
-    color: '#F15A50', // Texto en rojo coral
+    color: '#F15A50', 
   },
   input: {
     marginBottom: 16,
-    backgroundColor: '#FFFFFF', // Fondo blanco para el input
-    color: '#333333', // Texto oscuro en el input
+    backgroundColor: '#FFFFFF', 
+    color: '#333333', 
   },
   customOutlineStyle: {
-    borderColor: '#F15A50', // Borde rojo coral
+    borderColor: '#F15A50', 
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
   button: {
-    backgroundColor: '#F15A50', // Botón rojo coral
+    backgroundColor: '#F15A50',
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    color: '#FFFFFF', // Texto blanco en los botones
+    color: '#FFFFFF', 
   },
 });
 

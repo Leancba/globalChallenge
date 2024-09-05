@@ -73,7 +73,6 @@ const ChatDetailScreen = ({ route, navigation }) => {
         <Appbar.BackAction color="#fff" onPress={() => navigation.goBack()} />
         <Avatar.Image size={40} source={{ uri: chat.avatar }} />
         
-        {/* Organiza el título y subtítulo en columna */}
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>{chat.contact}</Text>
           <Text style={styles.headerSubTitle}>{chat.lastTime}</Text>
@@ -113,17 +112,17 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
     width: '100%',
-    backgroundColor: '#FFFFFF', // Fondo blanco para la pantalla de chat
+    backgroundColor: '#FFFFFF',
   },
   header: {
-    backgroundColor: '#F15A50', // Rojo coral (Primario) para la cabecera
+    backgroundColor: '#F15A50', 
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10, // Ajusta el espacio alrededor
+    paddingHorizontal: 10, 
   },
   headerContent: {
     flexDirection: 'column',
-    marginLeft: 10, // Espacio entre el avatar y el texto
+    marginLeft: 10, 
   },
   headerTitle: {
     color: '#fff',
@@ -131,12 +130,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   headerSubTitle: {
-    color: 'rgba(255, 255, 255, 0.8)', // Texto blanco con opacidad para la última vez visto
+    color: 'rgba(255, 255, 255, 0.8)', 
     fontSize: 12,
   },
   container: {
     padding: 10,
-    backgroundColor: '#FFFFFF', // Fondo blanco
+    backgroundColor: '#FFFFFF',
     flexGrow: 1,
     justifyContent: 'flex-start',
   },
@@ -156,43 +155,43 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   bubbleLeft: {
-    backgroundColor: 'rgba(241, 90, 80, 0.2)', // Rojo coral con opacidad para los mensajes recibidos
+    backgroundColor: 'rgba(241, 90, 80, 0.2)',
     alignSelf: 'flex-start',
   },
   bubbleRight: {
-    backgroundColor: '#E0E0E0', // Gris claro para los mensajes enviados
+    backgroundColor: '#E0E0E0',
     alignSelf: 'flex-end',
   },
   messageText: {
-    color: '#333333', // Texto oscuro para contraste
+    color: '#333333', 
   },
   time: {
     fontSize: 10,
     marginTop: 5,
     textAlign: 'right',
-    color: 'rgba(0, 0, 0, 0.5)', // Tiempo en gris suave para mejor contraste
+    color: 'rgba(0, 0, 0, 0.5)',
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#FF8C7A', // Rosa salmón para la barra de entrada de texto
+    backgroundColor: '#FF8C7A',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   textInput: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#F15A50', // Borde rojo coral (Primario)
+    borderColor: '#F15A50',
     borderRadius: 20,
     paddingHorizontal: 15,
     paddingVertical: 10,
     marginRight: 10,
     backgroundColor: '#fff',
-    color: '#000', // Texto negro en el input
+    color: '#000',
   },
   sendButton: {
-    backgroundColor: '#F15A50', // Botón de envío rojo coral
+    backgroundColor: '#F15A50',
   },
 });
 

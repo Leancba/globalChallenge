@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   container: {
-    backgroundColor: "#FFFFFF", // Fondo blanco
+    backgroundColor: "#FFFFFF", 
     borderRadius: 10,
     padding: 15,
     alignItems: 'center',
@@ -118,12 +118,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontFamily: 'Poppins-SemiBold',
-    color: '#F15A50', // Rojo coral para el título
+    color: '#F15A50', 
   },
   subtitle: {
     fontFamily: 'Poppins-Regular',
     fontSize: 18,
-    color: '#333333', // Texto oscuro para subtítulo
+    color: '#333333', 
     textAlign: 'center',
     marginTop: 10,
   },
@@ -147,24 +147,24 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   cancelButton: {
-    borderColor: '#F15A50', // Rojo coral para el borde
+    borderColor: '#F15A50', 
     borderWidth: 2,
-    backgroundColor: 'white', // Fondo blanco
+    backgroundColor: 'white', 
     flex: 1,
     marginHorizontal: 5,
   },
   saveButton: {
-    backgroundColor: '#F15A50', // Botón rojo coral
+    backgroundColor: '#F15A50', 
     flex: 1,
     marginHorizontal: 5,
   },
   textCancel: {
-    color: '#F15A50', // Texto rojo coral
+    color: '#F15A50', 
     fontSize: 13,
     fontFamily: 'Poppins-SemiBold',
   },
   textSave: {
-    color: 'white', // Texto blanco para el botón de guardar
+    color: 'white',
     fontSize: 13,
     fontFamily: 'Poppins-SemiBold',
   },

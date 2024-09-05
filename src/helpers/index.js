@@ -62,10 +62,10 @@ export const CustomAppBar = ({ route, navigation }) => {
 
   const styles = {
     appbarHeader: {
-      backgroundColor: '#F15A50', // Rojo coral (Primario)
+      backgroundColor: '#F15A50',
     },
     headerTitle: {
-      color: '#fff', // Texto blanco para contraste
+      color: '#fff',
       fontFamily: 'Poppins-SemiBold',
     },
   };
@@ -188,7 +188,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
 
 
 export const highlightText = (text, query) => {

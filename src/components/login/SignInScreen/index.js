@@ -8,7 +8,7 @@ import { useToast } from "react-native-toast-notifications";
 import { inputSignIn } from "./inputs";
 import { SignIn } from "services/userDataApi";
 
-import WelcomeScreen from "../WelcomeScren";
+import WelcomeScreen from "./TermsModal";
 
 const SignInComponent = ({ navigation }) => {
   const toast = useToast();

@@ -41,7 +41,6 @@ const UserProfile = () => {
         />
       </View>
 
-      {/* List for Name */}
       <List.Item
         title={userData.name}
         style={styles.listItem}
@@ -58,7 +57,6 @@ const UserProfile = () => {
         )}
       />
 
-      {/* List for Status */}
       <List.Item
         title={userData.status}
         style={styles.listItem}
@@ -75,7 +73,7 @@ const UserProfile = () => {
         )}
       />
 
-      {/* List for Phone */}
+      
       <List.Item
         title={userData.phone}
         style={styles.listItem}
@@ -112,7 +110,7 @@ const UserProfile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FF8C7A', // Fondo rosa salmón para items generales
+    backgroundColor: '#FF8C7A',
     padding: 20,
     alignItems: 'center',
   },
@@ -124,11 +122,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    backgroundColor: '#F15A50', // Botón de cámara con rojo coral (Primario)
+    backgroundColor: '#F15A50',
     borderRadius: 50,
   },
   listItem: {
-    backgroundColor: '#FFB199', // Fondo más claro para los ítems (Tercera capa)
+    backgroundColor: '#FFB199', 
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,
@@ -136,11 +134,11 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   listTitleStyle: {
-    color: '#fff', // Títulos en blanco para contraste
+    color: '#fff', 
     fontFamily: 'Poppins-SemiBold',
   },
   listDescriptionStyle: {
-    color: 'rgba(255, 255, 255, 0.8)', // Texto más claro para la descripción
+    color: 'rgba(255, 255, 255, 0.8)', 
     fontFamily: 'Poppins-Regular',
   },
 });

@@ -47,7 +47,7 @@ const Settings = ({ navigation }) => {
         description="Cambiar nombre, actualizar avatar"
         descriptionStyle={styles.descriptionStyle}
         left={() => (
-          <List.Icon color={'#F15A50'} icon="cog" /> // Icono en color primario
+          <List.Icon color={'#F15A50'} icon="cog" /> 
         )}
       />
 
@@ -58,7 +58,7 @@ const Settings = ({ navigation }) => {
         title="Cerrar sesión"
         titleStyle={styles.logoutTitle}
         left={() => (
-          <List.Icon color={'#fff'} icon="door-closed-lock" /> // Icono en color primario
+          <List.Icon color={'#fff'} icon="door-closed-lock" /> 
         )}
         onPress={handleLogout}
       />
@@ -69,30 +69,30 @@ const Settings = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // Fondo blanco para un diseño limpio
+    backgroundColor: '#FFFFFF', 
   },
   listItem: {
     padding: 10,
-    backgroundColor: '#FF8C7A', // Fondo rosa salmón para items generales
+    backgroundColor: '#FF8C7A', 
   },
   listItemLogout: {
     padding: 10,
-    backgroundColor: '#F15A50', // Rojo coral para el ítem de cerrar sesión
+    backgroundColor: '#F15A50', 
   },
   titleStyle: {
-    color: '#333333', // Texto oscuro para contraste
+    color: '#333333', 
     fontFamily: 'Poppins-SemiBold',
   },
   logoutTitle: {
-    color: '#fff', // Texto blanco para el ítem de cerrar sesión
+    color: '#fff', 
     fontFamily: 'Poppins-SemiBold',
   },
   descriptionStyle: {
-    color: 'rgba(0, 0, 0, 0.6)', // Texto gris oscuro para descripciones
+    color: 'rgba(0, 0, 0, 0.6)',
     fontFamily: 'Poppins-Regular',
   },
   divider: {
-    backgroundColor: '#F15A50', // Divider en color primario para marcar separación
+    backgroundColor: '#F15A50', 
     height: 1,
   },
 });
