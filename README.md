@@ -64,6 +64,37 @@ Una vez dentro de la aplicacion, podra ingresar a la misma con las siguientes cr
 * [React Redux](https://react-redux.js.org/) - Gestion de estados globales
 
 
+
+# Estructura del Proyecto
+
+Este proyecto está organizado en las siguientes carpetas principales dentro del directorio `src`:
+
+```bash
+src
+├── components      # Componentes reutilizables de la UI
+├── helpers         # Métodos utilitarios y funciones compartidas
+├── Redux           # Manejador de estado global con Redux
+└── services        # Llamadas a APIs y manejo de servicios externos
+```
+
+# Funcionalidad de la Aplicación
+
+### 1. **Inicio de Sesión**
+- Los usuarios ingresan con su nombre de usuario y contraseña.
+
+### 2. **Lista de Chats**
+- Al iniciar sesión, los usuarios pueden ver una lista de todos los chats activos.
+
+### 3. **Ingresar a un Chat**
+- Los usuarios pueden seleccionar un chat de la lista para ver y enviar mensajes.
+
+### 4. **Eliminar un Chat**
+- Manteniendo presionado un chat, el usuario puede eliminarlo de la lista.
+
+### 5. **Editar Perfil**
+- Los usuarios pueden modificar sus datos de perfil (nombre, foto, etc.) desde la sección de perfil.
+
+
 ## 🛠 Soporte
 
 Cualquier error de compilación u otro factor que impida ejecutar y/o compilar la aplicación, no dudes en comunicarte conmigo para poder ayudarte a ejecutar correctamente el proceso. ¡Muchas gracias!

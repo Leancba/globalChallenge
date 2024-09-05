@@ -50,7 +50,7 @@ export const toastProviderConfig = {
     <Avatar.Image
       size={25}
       style={{ backgroundColor: "#0085ff" }}
-      source={require('../components/assets/icon.png')}
+      source={Logo}
     />
   ),
 };

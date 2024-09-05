@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, ScrollView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, ScrollView, Dimensions, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Appbar, Searchbar, List, Avatar, Text } from 'react-native-paper';
 import { getUserData } from 'services/userDataApi';
@@ -17,7 +17,6 @@ const ChatListScreen = ({ navigation }) => {
   const [filteredChatsByName, setFilteredChatsByName] = useState([]);
   const [filteredChatsByMessage, setFilteredChatsByMessage] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [menuVisible, setMenuVisible] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
 
   useEffect(() => {
@@ -53,7 +52,6 @@ const ChatListScreen = ({ navigation }) => {
   }, [searchQuery, chats]);
 
   const handleNavigateAndCloseMenu = (screen, params) => {
-    setMenuVisible(false);
     setSelectedChat(null);
     navigation.navigate(screen, params);
   };
@@ -67,145 +65,162 @@ const ChatListScreen = ({ navigation }) => {
     });
   };
 
+  const handleDeselectChat = () => {
+    if (selectedChat) {
+      setSelectedChat(null);
+    }
+    Keyboard.dismiss();
+  };
+
+  const handlePressItem = (callback) => {
+    if (selectedChat) {
+      setSelectedChat(null); 
+    } else {
+      callback();
+    }
+  };
+
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <Appbar.Header style={styles.appbarHeader}>
-        {selectedChat ? (
-          <>
-            <Appbar.Content title="Eliminar chat" titleStyle={styles.appbarTitle} />
-            <Appbar.Action icon="trash-can" color="#fff" onPress={handleDeleteChat} />
-          </>
-        ) : (
-          <>
-            <Appbar.Content title="GlobalChat" titleStyle={styles.appbarTitle} />
-            <TouchableOpacity onPress={() => handleNavigateAndCloseMenu('Settings')}>
-              <Avatar.Image
-                size={35}
-                source={Logo}
-                style={styles.avatar}
-              />
-            </TouchableOpacity>
-          </>
-        )}
-      </Appbar.Header>
-
-      <Searchbar
-        placeholder="Buscar"
-        iconColor="#F15A50"
-        inputStyle={{color:'black'}} 
-        onChangeText={(text) => setSearchQuery(text)}
-        value={searchQuery}
-        style={styles.searchbar}
-      />
-
-      {loading ? (
-        <View>
-          {skeletons.map((_, index) => (
-            <View key={index} style={styles.skeletonContainer}>
-              <Skeleton
-                width={60}
-                height={60}
-                style={styles.skeletonAvatar}
-              />
-              <Skeleton
-                width={screenWidth - 80}
-                height={70}
-              />
-            </View>
-          ))}
-        </View>
-      ) : (
-        <ScrollView style={styles.scrollView}>
-          {!searchQuery && chats?.map((chat) => (
-            <List.Item
-              key={chat.id}
-              title={chat.contact}
-              titleStyle={styles.listItemTitle}
-              description={chat.lastMessage}
-              descriptionNumberOfLines={1}
-              descriptionStyle={styles.listItemDescription}
-              left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
-              right={() => (
-                <View style={styles.listItemRight}>
-                  <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
-                </View>
-              )}
-              onPress={() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat })}
-              onLongPress={() => setSelectedChat(chat)}
-            />
-          ))}
-
-          {searchQuery && (
+    <TouchableWithoutFeedback onPress={handleDeselectChat}>
+      <SafeAreaView style={styles.safeArea}>
+        <Appbar.Header style={styles.appbarHeader}>
+          {selectedChat ? (
             <>
-              {filteredChatsByName.length > 0 && (
-                <>
-                  <Text style={styles.filteredText}>Chats</Text>
-                  {filteredChatsByName.map((chat) => (
-                    <List.Item
-                      key={chat.id}
-                      title={chat.contact}
-                      titleStyle={styles.listItemTitle}
-                      description={chat.lastMessage}
-                      descriptionNumberOfLines={1}
-                      left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
-                      right={() => (
-                        <View style={styles.listItemRight}>
-                          <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
-                        </View>
-                      )}
-                      onPress={() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat })}
-                      onLongPress={() => setSelectedChat(chat)}
-                    />
-                  ))}
-                </>
-              )}
-
-              {filteredChatsByMessage.length > 0 && (
-                <>
-                  <Text style={styles.filteredText}>Mensajes</Text>
-                  {filteredChatsByMessage.map((chat) => (
-                    <List.Item
-                      key={chat.id}
-                      title={chat.contact}
-                      titleStyle={styles.listItemTitle}
-                      description={() => (
-                        <Text style={styles.descriptionContainer}>
-                          {highlightText(chat.lastMessage, searchQuery)}
-                        </Text>
-                      )}
-                      descriptionNumberOfLines={1}
-                      right={() => (
-                        <View style={styles.listItemRight}>
-                          <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
-                        </View>
-                      )}
-                      onPress={() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat })}
-                      onLongPress={() => setSelectedChat(chat)}
-                    />
-                  ))}
-                </>
-              )}
-
-              {filteredChatsByName.length === 0 && filteredChatsByMessage.length === 0 && (
-                <View style={styles.noResultsContainer}>
-                  <Text style={styles.noResultsText}>No hay resultados en los chats ni contactos</Text>
-                </View>
-              )}
+              <Appbar.Content title="Eliminar chat" titleStyle={styles.appbarTitle} />
+              <Appbar.Action icon="trash-can" color="#fff" onPress={handleDeleteChat} />
+            </>
+          ) : (
+            <>
+              <Appbar.Content title="GlobalChat" titleStyle={styles.appbarTitle} />
+              <TouchableOpacity onPress={() => handleNavigateAndCloseMenu('Settings')}>
+                <Avatar.Image
+                  size={35}
+                  source={Logo}
+                  style={styles.avatar}
+                />
+              </TouchableOpacity>
             </>
           )}
-        </ScrollView>
-      )}
-    </SafeAreaView>
+        </Appbar.Header>
+
+        <Searchbar
+          placeholder="Buscar"
+          iconColor="#F15A50"
+          inputStyle={{ color: 'black' }}
+          onChangeText={(text) => setSearchQuery(text)}
+          value={searchQuery}
+          style={styles.searchbar}
+        />
+
+        {loading ? (
+          <View>
+            {skeletons.map((_, index) => (
+              <View key={index} style={styles.skeletonContainer}>
+                <Skeleton
+                  width={60}
+                  height={60}
+                  style={styles.skeletonAvatar}
+                />
+                <Skeleton
+                  width={screenWidth - 80}
+                  height={70}
+                />
+              </View>
+            ))}
+          </View>
+        ) : (
+          <ScrollView style={styles.scrollView}>
+            {!searchQuery && chats?.map((chat) => (
+              <List.Item
+                key={chat.id}
+                title={chat.contact}
+                titleStyle={styles.listItemTitle}
+                description={chat.lastMessage}
+                descriptionNumberOfLines={1}
+                descriptionStyle={styles.listItemDescription}
+                left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
+                right={() => (
+                  <View style={styles.listItemRight}>
+                    <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
+                  </View>
+                )}
+                onPress={() => handlePressItem(() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat }))}
+                onLongPress={() => handlePressItem(() => setSelectedChat(chat))}
+              />
+            ))}
+
+            {searchQuery && (
+              <>
+                {filteredChatsByName.length > 0 && (
+                  <>
+                    <Text style={styles.filteredText}>Chats</Text>
+                    {filteredChatsByName.map((chat) => (
+                      <List.Item
+                        key={chat.id}
+                        title={chat.contact}
+                        titleStyle={styles.listItemTitle}
+                        description={chat.lastMessage}
+                        descriptionNumberOfLines={1}
+                        left={() => <Avatar.Image size={48} source={{ uri: chat.avatar }} />}
+                        right={() => (
+                          <View style={styles.listItemRight}>
+                            <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
+                          </View>
+                        )}
+                        onPress={() => handlePressItem(() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat }))}
+                        onLongPress={() => handlePressItem(() => setSelectedChat(chat))}
+                      />
+                    ))}
+                  </>
+                )}
+
+                {filteredChatsByMessage.length > 0 && (
+                  <>
+                    <Text style={styles.filteredText}>Mensajes</Text>
+                    {filteredChatsByMessage.map((chat) => (
+                      <List.Item
+                        key={chat.id}
+                        title={chat.contact}
+                        titleStyle={styles.listItemTitle}
+                        description={() => (
+                          <Text style={styles.descriptionContainer}>
+                            {highlightText(chat.lastMessage, searchQuery)}
+                          </Text>
+                        )}
+                        descriptionNumberOfLines={1}
+                        right={() => (
+                          <View style={styles.listItemRight}>
+                            <Text style={styles.listItemTime}>{chat.lastMessageTime}</Text>
+                          </View>
+                        )}
+                        onPress={() => handlePressItem(() => handleNavigateAndCloseMenu('ChatDetail', { chat: chat }))}
+                        onLongPress={() => handlePressItem(() => setSelectedChat(chat))}
+                      />
+                    ))}
+                  </>
+                )}
+
+                {filteredChatsByName.length === 0 && filteredChatsByMessage.length === 0 && (
+                  <View style={styles.noResultsContainer}>
+                    <Text style={styles.noResultsText}>No hay resultados en los chats ni contactos</Text>
+                  </View>
+                )}
+              </>
+            )}
+          </ScrollView>
+        )}
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
   },
   appbarHeader: {
-    backgroundColor: '#F15A50', 
+    backgroundColor: '#F15A50',
   },
   appbarTitle: {
     marginLeft: 10,
@@ -213,12 +228,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
   menuButtonLabel: {
-    color: '#FF8C7A', 
+    color: '#FF8C7A',
     fontFamily: 'Poppins-SemiBold',
   },
   searchbar: {
     margin: 8,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderColor: '#F07A50',
   },
@@ -237,7 +252,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   listItemTitle: {
-    color: '#333333', 
+    color: '#333333',
     fontFamily: 'Poppins-Regular',
   },
   listItemDescription: {
@@ -246,7 +261,7 @@ const styles = StyleSheet.create({
   },
   listItemRight: {
     justifyContent: 'center',
-    paddingLeft:10
+    paddingLeft: 10
   },
   listItemTime: {
     color: '#999999',
@@ -259,11 +274,11 @@ const styles = StyleSheet.create({
   filteredText: {
     fontWeight: 'bold',
     marginTop: 16,
-    color: '#F15A50', 
+    color: '#F15A50',
   },
   avatar: {
-    marginRight: 10,  
-    backgroundColor: 'transparent',  
+    marginRight: 10,
+    backgroundColor: 'transparent',
   },
   noResultsContainer: {
     justifyContent: 'center',
@@ -274,7 +289,7 @@ const styles = StyleSheet.create({
     color: '#999999',
     fontSize: 16,
     fontFamily: 'Poppins-SemiBold',
-    textAlign:'center'
+    textAlign: 'center'
   },
 });
 

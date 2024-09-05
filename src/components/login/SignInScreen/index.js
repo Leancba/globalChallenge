@@ -3,10 +3,10 @@ import { View, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Sty
 import { TextInput, Text, Button, Modal, Portal } from "react-native-paper"; 
 import { useForm, Controller } from "react-hook-form";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import icon from '../../assets/icon.png';
 import { useToast } from "react-native-toast-notifications";
 import { inputSignIn } from "./inputs";
 import { SignIn } from "services/userDataApi";
+import { Logo } from "helpers";
 
 import WelcomeScreen from "./TermsModal";
 
@@ -62,7 +62,7 @@ const SignInComponent = ({ navigation }) => {
       <StatusBar barStyle="light-content" backgroundColor="#F15A50" />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.logoContainer}>
-          <Image source={icon} style={styles.logo} />
+          <Image source={Logo} style={styles.logo} />
         </View>
 
         {inputSignIn?.map((field) => (
