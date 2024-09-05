@@ -96,6 +96,7 @@ const UserProfile = () => {
         editingField={editingField}
         fieldValue={fieldValue}
         setFieldValue={setFieldValue}
+        userData={userData}
       />
 
       <AvatarModal

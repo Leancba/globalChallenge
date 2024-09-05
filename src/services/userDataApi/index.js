@@ -42,22 +42,21 @@ export const getUserData = async (dispatch) => {
 
 };
 
-export const UpdateUserData = async (payload, dispatch) => {
+export const UpdateUserData = async (userData, payload, dispatch) => {
   
   try {
 
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    let userData = data.userProfile;
 
-    userData = {
+     const putUserData = {
       ...userData,
       ...payload,
     };
 
     dispatch({
       type: GET_USER_DATA,
-      payload: userData,
+      payload: putUserData,
     });
 
     return

@@ -11,6 +11,7 @@ const EditModal = ({
   editingField,
   fieldValue,
   setFieldValue,
+  userData
 }) => {
 
   const toast = useToast();
@@ -22,7 +23,7 @@ const EditModal = ({
     const updatedField = { [editingField.toLowerCase()]: fieldValue };
 
     try {
-      await UpdateUserData(updatedField, dispatch);
+      await UpdateUserData(userData, updatedField, dispatch);
       toast.show('Datos actualizados exitosamente', { type: "warning" });
     } catch (error) {
       toast.show('Ha ocurrido un error al actualizar los datos', { type: "danger" });

@@ -29,7 +29,7 @@ export default function AvatarModal({ userData, avatarModal, setAvatarModal }) {
     setLoading(true);
 
     try {
-      await UpdateUserData({ avatar: AvatarUrl }, dispatch);
+      await UpdateUserData(userData, { avatar: AvatarUrl }, dispatch);
       toast.show('Avatar actualizado exitosamente', { type: "warning" });
     } catch (error) {
       console.log(error);
